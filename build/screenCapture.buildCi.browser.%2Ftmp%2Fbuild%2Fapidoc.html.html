@@ -1555,7 +1555,24 @@ if (!results) {
 
   return res;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+Bench.prototype.query = function() {
+var self = this;
+
+if (this.dispatched &lt; this.count) {
+  this.dispatched += 1;
+  this.library.<span class="apidocCodeKeywordSpan">resolve</span>(names[this.dispatched % names.length], 'A', function
+ (err, res) {
+    self.done = Date.now();
+    if (err) {
+      self.count = 0;
+      console.log(err);
+      console.log(err.stack);
+      self.end();
+    } else {
+...</pre></li>
     </ul>
 
 
@@ -1988,20 +2005,21 @@ clearTimeout(this.timer_);
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    }
 
-    packet.question.push(req.question);
-    packet.send();
+var library_name = argv[0].toLowerCase();
+var concurrent = parseInt(argv[1]);
+var queries = parseInt(argv[2]);
 
-    this._ref();
-  } catch (e) {
-    req.<span class="apidocCodeKeywordSpan">error</span>(e);
-  }
+if (['stock', 'native-dns'].indexOf(library_name) === -1) {
+opt.showHelp();
+console.<span class="apidocCodeKeywordSpan">error</span>('library should be one of: stock, native-dns\r\n');
+process.exit(1);
 }
-};
 
-SocketQueue.prototype._onmessage = function(msg, remote) {
-var req, packet;
+if (isNaN(concurrent) || isNaN(queries)) {
+opt.showHelp();
+console.error('concurrency and queries should be integers');
+process.exit(1);
 ...</pre></li>
     </ul>
 
@@ -2421,7 +2439,24 @@ if (!results) {
 
   return res;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+Bench.prototype.query = function() {
+var self = this;
+
+if (this.dispatched &lt; this.count) {
+  this.dispatched += 1;
+  this.library.<span class="apidocCodeKeywordSpan">resolve</span>(names[this.dispatched % names.length], 'A', function
+ (err, res) {
+    self.done = Date.now();
+    if (err) {
+      self.count = 0;
+      console.log(err);
+      console.log(err.stack);
+      self.end();
+    } else {
+...</pre></li>
     </ul>
 
 
